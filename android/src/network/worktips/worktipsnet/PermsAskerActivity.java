@@ -1,4 +1,4 @@
-package network.loki.lokinet;
+package network.worktips.worktipsnet;
 
 import android.Manifest;
 import android.app.Activity;
@@ -132,7 +132,7 @@ public class PermsAskerActivity extends Activity {
     }
 
     private void startMainActivity() {
-        startActivity(new Intent(this, LokiNetActivity.class));
+        startActivity(new Intent(this, WorktipsNetActivity.class));
         finish();
     }
 

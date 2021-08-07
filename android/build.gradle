@@ -22,7 +22,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion "28.0.1"
     defaultConfig {
-        applicationId "network.loki.lokinet"
+        applicationId "network.worktips.worktipsnet"
         targetSdkVersion 28
         minSdkVersion 14
         versionCode 1
@@ -32,7 +32,7 @@ android {
         }
         externalNativeBuild {
             cmake {
-                targets "lokinetandroid"
+                targets "worktipsnetandroid"
                 arguments "-DANDROID=ON",
                           "-DSODIUM_LIBRARIES="+sodiumLib,
                           "-DSODIUM_INCLUDE_DIR="+sodiumInclude
@@ -68,7 +68,7 @@ android {
     }
     externalNativeBuild {
         cmake {
-            path lokinetCMake
+            path worktipsnetCMake
             
         }
     }

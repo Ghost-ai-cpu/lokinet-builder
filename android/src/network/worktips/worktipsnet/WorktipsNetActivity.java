@@ -1,4 +1,4 @@
-package network.loki.lokinet;
+package network.worktips.worktipsnet;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,8 +29,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LokiNetActivity extends Activity {
-	private static final String TAG = "lokinet-activity";
+public class WorktipsNetActivity extends Activity {
+	private static final String TAG = "worktipsnet-activity";
 	private TextView textView;
 	
 	
@@ -48,8 +48,8 @@ public class LokiNetActivity extends Activity {
 			Log.e(TAG, "failed to get config");
 			return;
 		}
-		Lokinet_JNI.loadLibraries();
-		Lokinet_JNI.startLokinet(conf);
+		Worktipsnet_JNI.loadLibraries();
+		Worktipsnet_JNI.startWorktipsnet(conf);
 	}
 	
 	@Override
@@ -110,7 +110,7 @@ public class LokiNetActivity extends Activity {
 		
 		switch(id){
 			case R.id.action_stop:
-			Lokinet_JNI.stopLokinet();
+			Worktipsnet_JNI.stopWorktipsnet();
 			return true;
 		}
 		
@@ -126,7 +126,7 @@ public class LokiNetActivity extends Activity {
 	*/
 	private void copyAsset(String path) {
 		AssetManager manager = getAssets();
-		Path dir = Paths.get(Environment.getExternalStorageDirectory().getAbsolutePath(), "lokinet", path);
+		Path dir = Paths.get(Environment.getExternalStorageDirectory().getAbsolutePath(), "worktipsnet", path);
 		try {
 			String[] contents = manager.list(path);
 			
@@ -160,7 +160,7 @@ public class LokiNetActivity extends Activity {
 		* Path to asset, relative to app's assets directory.
 	*/
 	private String copyFileAsset(String path) {
-		Path p = Paths.get(Environment.getExternalStorageDirectory().getAbsolutePath(), "lokinet", path);
+		Path p = Paths.get(Environment.getExternalStorageDirectory().getAbsolutePath(), "worktipsnet", path);
 		try {
 			p.getParent().toFile().mkdirs();
       InputStream in = getAssets().open(path);

@@ -2,8 +2,8 @@ REPO := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 BUILD_DIR_BASE=$(REPO)/build
 
-EXE = $(REPO)/lokinet
-RC_EXE = $(REPO)/lokinet-rcutil
+EXE = $(REPO)/worktipsnet
+RC_EXE = $(REPO)/worktipsnet-rcutil
 
 DEP_PREFIX=$(BUILD_DIR_BASE)/prefix
 PREFIX_SRC=$(DEP_PREFIX)/src
@@ -66,7 +66,7 @@ sodium: sodium-configure
 build: ensure sodium
 	cd $(BUILD_DIR) && cmake $(LLARPD_SRC) -DSODIUM_LIBRARIES=$(SODIUM_LIB) -DSODIUM_INCLUDE_DIR=$(DEP_PREFIX)/include -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) -DHAVE_CXX17_FILESYSTEM=OFF
 	$(MAKE) -C $(BUILD_DIR)
-	cp $(BUILD_DIR)/lokinet $(EXE)
+	cp $(BUILD_DIR)/worktipsnet $(EXE)
 
 static-sodium-configure: ensure
 	cd $(SODIUM_SRC) && $(SODIUM_SRC)/autogen.sh
@@ -79,7 +79,7 @@ static-sodium: static-sodium-configure
 static: static-sodium
 	cd $(STATIC_BUILD_DIR) && cmake $(LLARPD_SRC) -DSODIUM_LIBRARIES=$(SODIUM_LIB) -DSODIUM_INCLUDE_DIR=$(DEP_PREFIX)/include -DSTATIC_LINK=ON -DCMAKE_BUILD_TYPE=$(BUILD_TYPE)
 	$(MAKE) -C $(STATIC_BUILD_DIR)
-	cp $(STATIC_BUILD_DIR)/lokinet $(EXE)
+	cp $(STATIC_BUILD_DIR)/worktipsnet $(EXE)
 
 android-sodium: ensure
 	cd $(SODIUM_SRC) && $(SODIUM_SRC)/autogen.sh && LIBSODIUM_FULL_BUILD=1 ANDROID_NDK_HOME=$(NDK) $(SODIUM_SRC)/dist-build/android-x86.sh
@@ -93,7 +93,7 @@ android-prepare:
 	echo "#auto generated don't modify kthnx" >> $(ANDROID_PROPS)
 	echo "sodiumInclude=$(SODIUM_SRC)/libsodium-android-i686/include" >> $(ANDROID_PROPS)
 	echo "sodiumLib=$(SODIUM_SRC)/libsodium-android-i686/lib/libsodium.a" >> $(ANDROID_PROPS)
-	echo "lokinetCMake=$(LLARPD_SRC)/CMakeLists.txt" >> $(ANDROID_PROPS)
+	echo "worktipsnetCMake=$(LLARPD_SRC)/CMakeLists.txt" >> $(ANDROID_PROPS)
 	echo "org.gradle.parallel=true" >> $(ANDROID_PROPS)
 	echo "#auto generated don't modify kthnx" >> $(ANDROID_LOCAL_PROPS)
 	echo "sdk.dir=$(SDK)" >> $(ANDROID_LOCAL_PROPS)
@@ -104,11 +104,11 @@ android-arm-mk-prepare:
 	echo "#auto generated don't modify kthnx" >> $(ANDROID_MK)
 	echo 'LOCAL_PATH := $$(call my-dir)' >> $(ANDROID_MK)
 	echo 'include $$(CLEAR_VARS)' >> $(ANDROID_MK)
-	echo "LOCAL_MODULE := lokinet" >> $(ANDROID_MK)
+	echo "LOCAL_MODULE := worktipsnet" >> $(ANDROID_MK)
 	echo "LOCAL_CPP_FEATURES := rtti exceptions" >> $(ANDROID_MK)
-	echo "LOCAL_SRC_FILES := $(JNI_DIR)/lokinet_android.cpp" >> $(ANDROID_MK)
+	echo "LOCAL_SRC_FILES := $(JNI_DIR)/worktipsnet_android.cpp" >> $(ANDROID_MK)
 	echo "LOCAL_C_INCLUDES += $(LLARPD_SRC)/include" >> $(ANDROID_MK)
-	echo "LOCAL_STATIC_LIBRARIES := sodium lokinet-static" >> $(ANDROID_MK)
+	echo "LOCAL_STATIC_LIBRARIES := sodium worktipsnet-static" >> $(ANDROID_MK)
 	echo 'include $$(BUILD_SHARED_LIBRARY)' >> $(ANDROID_MK)
 	echo 'LOCAL_PATH := $$(call my-dir)' >> $(ANDROID_MK)
 	echo 'include $$(CLEAR_VARS)' >> $(ANDROID_MK)
@@ -118,8 +118,8 @@ android-arm-mk-prepare:
 	echo 'include $$(PREBUILT_STATIC_LIBRARY)' >> $(ANDROID_MK)
 	echo 'LOCAL_PATH := $$(call my-dir)' >> $(ANDROID_MK)
 	echo 'include $$(CLEAR_VARS)' >> $(ANDROID_MK)
-	echo "LOCAL_MODULE := lokinet-static" >> $(ANDROID_MK)
-	echo "LOCAL_SRC_FILES := $(BUILD_DIR)/liblokinet-static.a" >> $(ANDROID_MK)
+	echo "LOCAL_MODULE := worktipsnet-static" >> $(ANDROID_MK)
+	echo "LOCAL_SRC_FILES := $(BUILD_DIR)/libworktipsnet-static.a" >> $(ANDROID_MK)
 	echo "LOCAL_EXPORT_C_INCLUDES := $(LLARPD_SRC)/include" >> $(ANDROID_MK)
 	echo 'include $$(PREBUILT_STATIC_LIBRARY)' >> $(ANDROID_MK)
 
@@ -128,7 +128,7 @@ android: android-gradle
 debian: ensure sodium
 	cd $(DEB_BUILD_DIR) && cmake $(LLARPD_SRC) -DSODIUM_LIBRARIES=$(SODIUM_LIB) -DSODIUM_INCLUDE_DIR=$(DEP_PREFIX)/include -G "Unix Makefiles" -DDEBIAN=ON -DRELEASE_MOTTO="$(shell cat $(LLARPD_SRC)/motto.txt)" -DCMAKE_BUILD_TYPE=Release
 	$(MAKE) -C $(DEB_BUILD_DIR)
-	cp $(DEB_BUILD_DIR)/lokinet $(EXE)
+	cp $(DEB_BUILD_DIR)/worktipsnet $(EXE)
 	cp $(DEB_BUILD_DIR)/rcutil $(RC_EXE)
 
 cross-sodium: ensure
@@ -139,7 +139,7 @@ cross-sodium: ensure
 cross: cross-sodium
 	cd $(BUILD_DIR) && cmake $(LLARPD_SRC) -DSTATIC_LINK=ON -DSODIUM_LIBRARIES=$(SODIUM_LIB) -DSODIUM_INCLUDE_DIR=$(DEP_PREFIX)/include -DCMAKE_C_COMPILER=$(CROSS_CC) -DCMAKE_CXX_COMPILER=$(CROSS_CXX) -DCMAKE_CROSS_COMPILING=ON -DCMAKE_BUILD_TYPE=Release
 	$(MAKE) -C $(BUILD_DIR)
-	cp $(BUILD_DIR)/lokinet $(EXE)
+	cp $(BUILD_DIR)/worktipsnet $(EXE)
 
 windows-sodium: ensure
 	cd $(SODIUM_SRC) && $(SODIUM_SRC)/autogen.sh
@@ -154,23 +154,23 @@ wow64-sodium: ensure
 legacy-wow64: wow64-sodium
 	cd $(WIN_BUILD_DIR) && cmake $(LLARPD_SRC) -DSTATIC_LINK=ON -DSODIUM_LIB=$(SODIUM_LIB) -DSODIUM_INCLUDE_DIR=$(DEP_PREFIX)/include -DCMAKE_TOOLCHAIN_FILE=$(MINGW_WOW64_TOOLCHAIN) -DHAVE_CXX17_FILESYSTEM=ON -DCMAKE_BUILD_TYPE=$(BUILD_TYPE)
 	$(MAKE) -C $(WIN_BUILD_DIR)
-	cp $(WIN_BUILD_DIR)/lokinet.exe $(EXE).exe
+	cp $(WIN_BUILD_DIR)/worktipsnet.exe $(EXE).exe
 
 wow64-release: wow64-sodium
 	cd $(WIN_BUILD_DIR) && cmake $(LLARPD_SRC) -DSTATIC_LINK=ON -DSODIUM_LIB=$(SODIUM_LIB) -DSODIUM_INCLUDE_DIR=$(DEP_PREFIX)/include -DCMAKE_TOOLCHAIN_FILE=$(MINGW_WOW64_TOOLCHAIN) -DHAVE_CXX17_FILESYSTEM=ON -DCMAKE_BUILD_TYPE=Release -DRELEASE_MOTTO="$(shell cat $(MOTTO))"
 	$(MAKE) -C $(WIN_BUILD_DIR)
-	cp $(WIN_BUILD_DIR)/lokinet.exe $(EXE).exe
+	cp $(WIN_BUILD_DIR)/worktipsnet.exe $(EXE).exe
 	gpg --sign --detach $(EXE).exe
 
 windows: windows-sodium
 	cd $(WIN_BUILD_DIR) && cmake $(LLARPD_SRC) -DSTATIC_LINK=ON -DSODIUM_LIB=$(SODIUM_LIB) -DSODIUM_INCLUDE_DIR=$(DEP_PREFIX)/include -DCMAKE_TOOLCHAIN_FILE=$(MINGW_TOOLCHAIN) -DHAVE_CXX17_FILESYSTEM=ON -DCMAKE_BUILD_TYPE=$(BUILD_TYPE)
 	$(MAKE) -C $(WIN_BUILD_DIR)
-	cp $(WIN_BUILD_DIR)/lokinet.exe $(EXE).exe
+	cp $(WIN_BUILD_DIR)/worktipsnet.exe $(EXE).exe
 
 windows-release: windows-sodium
 	cd $(WIN_BUILD_DIR) && cmake $(LLARPD_SRC) -DSTATIC_LINK=ON -DSODIUM_LIB=$(SODIUM_LIB) -DSODIUM_INCLUDE_DIR=$(DEP_PREFIX)/include -DCMAKE_TOOLCHAIN_FILE=$(MINGW_TOOLCHAIN) -DHAVE_CXX17_FILESYSTEM=ON -DCMAKE_BUILD_TYPE=Release -DRELEASE_MOTTO="$(shell cat $(MOTTO))"
 	$(MAKE) -C $(WIN_BUILD_DIR)
-	cp $(WIN_BUILD_DIR)/lokinet.exe $(EXE).exe
+	cp $(WIN_BUILD_DIR)/worktipsnet.exe $(EXE).exe
 	gpg --sign --detach $(EXE).exe
 
 motto:
@@ -179,7 +179,7 @@ motto:
 release: static-sodium motto
 	cd $(BUILD_DIR) && cmake $(LLARPD_SRC) -DSODIUM_LIBRARIES=$(SODIUM_LIB) -DSODIUM_INCLUDE_DIR=$(DEP_PREFIX)/include -DSTATIC_LINK=ON -DCMAKE_BUILD_TYPE=Release -DRELEASE_MOTTO="$(shell cat $(MOTTO))"
 	$(MAKE) -C $(BUILD_DIR)
-	cp $(BUILD_DIR)/lokinet $(EXE)
+	cp $(BUILD_DIR)/worktipsnet $(EXE)
 	gpg --sign --detach $(EXE)
 
 clean:

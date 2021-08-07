@@ -17,7 +17,7 @@ build:linux:
     - make
   artifacts:
     paths:
-      - "lokinet"
+      - "worktipsnet"
 
 build:windows-mingw:
   image: ubuntu:latest
@@ -31,7 +31,7 @@ build:windows-mingw:
     - make -j4 windows
   artifacts:
     paths:
-      - "lokinet.exe"
+      - "worktipsnet.exe"
 
 build:osx:
   tags:
@@ -41,4 +41,4 @@ build:osx:
     - make
   artifacts:
     paths:
-      - "lokinet"
+      - "worktipsnet"

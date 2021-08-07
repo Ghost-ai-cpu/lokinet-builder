@@ -1,9 +1,9 @@
-.TH "lokinet" "1" "Aug 09, 2018"
+.TH "worktipsnet" "1" "Aug 09, 2018"
 
 .SH "NAME"
-lokinet \- Reference implementation for LLARP.
+worktipsnet \- Reference implementation for LLARP.
 .SH "SYNOPSIS"
-.B lokinet
+.B worktipsnet
 [\fIconfig.ini\fR]
 .SH "DESCRIPTION"
 For a number of years, work has been proceeding in order to bring prefection
@@ -11,10 +11,10 @@ to the crudely concieved idea of a packet based onion routing protocol with a
 cryptoeconomic insentive sybil resistence that not only would be able to
 provide low latency anonymous internet access but also be capable of 
 automatically tunneling all local network traffic over said mixnet. Such an a
-program would be the turbo encab-, rather, lokinet. Now basically the only new
+program would be the turbo encab-, rather, worktipsnet. Now basically the only new
 principal involved is that now instead of restricting the user to using TCP and 
 exposing a socks proxy or transparent proxy like Tor, an ip tunnel is provided
-with a dns resolver for intercepting lookups for the .loki tld. The original
+with a dns resolver for intercepting lookups for the .worktips tld. The original
 implementation was in C but eventually devolved into C++ in such a way that 
 there is a public C api but internally entirely implemented with C++11 wrapped
 with a foriegn function interface. The latter being more rapidly developable,
@@ -26,10 +26,10 @@ daemon.ini
 default configuration file (auto generated if not present)
 .RE
 .SH "SEE ALSO"
-Documentation for lokinet configuration with loki service nodes.
+Documentation for worktipsnet configuration with worktips service nodes.
 .SH "AUTHOR"
 This manual page was written by Jeff <\m[blue]\fBjeff@i2p\&.rocks\fR\m[]> for ubuntu xenial.
 .PP
-Permission is granted to copy, distribute and/or modify this document under the terms of the same license of lokinet source code.
+Permission is granted to copy, distribute and/or modify this document under the terms of the same license of worktipsnet source code.
 .RE
 See the LICENSE file for more information.

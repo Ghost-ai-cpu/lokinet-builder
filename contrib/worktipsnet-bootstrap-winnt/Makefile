@@ -3,7 +3,7 @@
 # requires wget to be installed for ca bundle download
 
 # to build: 
-# $ [g]make prepare;[g]make lokinet-bootstrap
+# $ [g]make prepare;[g]make worktipsnet-bootstrap
 
 # set this beforehand if you use clang
 CC ?= i686-w64-mingw32-gcc
@@ -41,11 +41,11 @@ prepare: zpipe base64enc download
 	echo ';' >> out.bin
 	sed -i '48r out.bin' bootstrap.c
 
-lokinet-bootstrap: bootstrap.o miniz.o
+worktipsnet-bootstrap: bootstrap.o miniz.o
 	$(CC) $(WINNT_LIBS) -static -s $^ -o $@.exe -lmbedx509 -lmbedtls -lmbedcrypto -lws2_32
 
 clean:
-	-@rm lokinet-bootstrap.exe
+	-@rm worktipsnet-bootstrap.exe
 	-@rm base64enc
 	-@rm zpipe
 	-@rm cacert.pem

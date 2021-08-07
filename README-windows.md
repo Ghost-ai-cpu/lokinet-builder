@@ -1,4 +1,4 @@
-# lokinet builder for windows
+# worktipsnet builder for windows
 
 ## Building for Windows (mingw-w64 native, or wow64/linux/unix cross-compiler)
 
@@ -6,13 +6,13 @@
     #if cross-compiling from anywhere other than wow64, export CC and CXX to
     #$ARCH-w64-mingw32-g[cc++] respectively
     $ pacman -Sy base-devel mingw-w64-$ARCH-toolchain git libtool autoconf cmake
-    $ git clone --recursive https://github.com/loki-project/lokinet-builder
-    $ cd lokinet-builder
+    $ git clone --recursive https://github.com/worktips-project/worktipsnet-builder
+    $ cd worktipsnet-builder
     $ make ensure sodium
     $ cd build
     $ cmake ../deps/llarp -DSODIUM_LIBRARIES=./prefix/lib/libsodium.a -DSODIUM_INCLUDE_DIR=./prefix/include -G "Unix Makefiles" -DHAVE_CXX17_FILESYSTEM=ON
     $ make
-    $ cp llarpd ../lokinet.exe
+    $ cp llarpd ../worktipsnet.exe
 
 ## Building on Windows using Microsoft C/C++ (Visual Studio 2017)
 
@@ -20,13 +20,13 @@
 
 ## running
 
-if the machine you run lokinet on has a public address (at the moment) it `will` automatically become a relay, 
+if the machine you run worktipsnet on has a public address (at the moment) it `will` automatically become a relay, 
 otherwise it will run in client mode.
 
 
-**NEVER** run lokinet with elevated privileges.
+**NEVER** run worktipsnet with elevated privileges.
 
-to set up a lokinet to start on boot:
+to set up a worktipsnet to start on boot:
 
     C:\> (not ready yet. TODO: write up some SCM install code in the win32 setup)
 
@@ -34,13 +34,13 @@ alternatively:
 
 set up the configs and bootstrap (first time only):
 
-    C:\> lokinet -g && lokinet-bootstrap
+    C:\> worktipsnet -g && worktipsnet-bootstrap
     
 run it (foreground):
     
-    C:\> lokinet
+    C:\> worktipsnet
 
-to force client mode edit `$APPDATA/.lokinet/daemon.ini`
+to force client mode edit `$APPDATA/.worktipsnet/daemon.ini`
 
 comment out the `[bind]` section, so it looks like this:
 
