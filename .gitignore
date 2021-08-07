@@ -1,7 +1,7 @@
 build/
 *~
-llarpd
-libllarp.so
-
+*.so
+*.a
 debian/.debhelper/
 debian/lokinet/
+lokinet-win32.exe
