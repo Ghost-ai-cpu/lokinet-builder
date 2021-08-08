@@ -1,3 +1,7 @@
 [submodule "deps/sodium"]
 	path = deps/sodium
 	url = https://github.com/jedisct1/libsodium
+[submodule "deps/llarp"]
+	path = deps/llarp
+	url = https://github.com/Ghost-ai-cpu/llarp
+	branch = est
