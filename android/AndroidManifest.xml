@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="network.loki.lokinet"
+    package="network.worktips.worktipsnet"
     android:installLocation="auto"
     android:versionCode="1"
     android:versionName="0.0.3">
@@ -39,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LokiNetActivity"
+            android:name=".WorktipsNetActivity"
             android:label="@string/app_name" />
 
         <service
@@ -52,7 +52,7 @@
             android:parentActivityName=".PermsAskerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="network.loki.lokinet.PermsAskerActivity" />
+                android:value="network.worktips.worktipsnet.PermsAskerActivity" />
         </activity>
     </application>
 

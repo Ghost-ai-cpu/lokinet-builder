@@ -1,4 +1,4 @@
-lokinet (0.2.3) UNRELEASED; urgency=medium
+worktipsnet (0.2.3) UNRELEASED; urgency=medium
 
   [ Jeff Becker (probably not evil) ]
   * MANDITORY UPGRADE FOR TOYNET
@@ -15,7 +15,7 @@ lokinet (0.2.3) UNRELEASED; urgency=medium
 
   * various dht fixes
 
-  * various dns fixes (still unused in lokinet executable)
+  * various dns fixes (still unused in worktipsnet executable)
 
   * hidden services should sorta work (no client interfacing code yet)
 
@@ -47,7 +47,7 @@ lokinet (0.2.3) UNRELEASED; urgency=medium
 
   * bump versions
 
-  * add lokinet-bootstrap script
+  * add worktipsnet-bootstrap script
 
   * dns automapping
 

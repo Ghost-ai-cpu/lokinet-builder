@@ -5,22 +5,22 @@
     #if cross-compiling from anywhere other than wow64, export CC and CXX to
     #$ARCH-w64-mingw32-g[cc++] respectively
     $ pacman -Sy base-devel mingw-w64-$ARCH-toolchain git libtool autoconf cmake
-    $ git clone --recursive https://github.com/loki-project/lokinet-builder
-    $ cd lokinet-builder
+    $ git clone --recursive https://github.com/worktips-project/worktipsnet-builder
+    $ cd worktipsnet-builder
     $ make ensure sodium
     $ cd build
     $ cmake ../deps/llarp -DSODIUM_LIBRARIES=./prefix/lib/libsodium.a -DSODIUM_INCLUDE_DIR=./prefix/include -G "Unix Makefiles" -DHAVE_CXX17_FILESYSTEM=ON
     $ make
-    $ cp llarpd ../lokinet.exe
+    $ cp llarpd ../worktipsnet.exe
 
 ## Building on Windows using Microsoft C/C++ (Visual Studio 2017)
 
-* clone https://github.com/loki-project/lokinet-builder from git-bash or whatever git browser you use
-* open `%CLONE_PATH%/lokinet-builder/deps/sodium/builds/msvc/vs2017/libsodium.sln` and build one of the targets
-* create a `build` folder in `%CLONE_PATH%/lokinet-builder`
-* run cmake-gui from `%CLONE_PATH%/lokinet-builder/deps/llarp` as the source directory
-  * define `SODIUM_LIB`  to `%CLONE_PATH%/lokinet-builder/deps/sodium/bin/win32/%CONFIG%/%TOOLSET%/%TARGET%/libsodium.lib`
-  * define `SODIUM_INCLUDE_DIR` to `%CLONE_PATH%/lokinet-builder/deps/sodium/src/libsodium/include`
+* clone https://github.com/worktips-project/worktipsnet-builder from git-bash or whatever git browser you use
+* open `%CLONE_PATH%/worktipsnet-builder/deps/sodium/builds/msvc/vs2017/libsodium.sln` and build one of the targets
+* create a `build` folder in `%CLONE_PATH%/worktipsnet-builder`
+* run cmake-gui from `%CLONE_PATH%/worktipsnet-builder/deps/llarp` as the source directory
+  * define `SODIUM_LIB`  to `%CLONE_PATH%/worktipsnet-builder/deps/sodium/bin/win32/%CONFIG%/%TOOLSET%/%TARGET%/libsodium.lib`
+  * define `SODIUM_INCLUDE_DIR` to `%CLONE_PATH%/worktipsnet-builder/deps/sodium/src/libsodium/include`
   * define `HAVE_CXX17_FILESYSTEM` to `TRUE`
   * select `Visual Studio 2017 15 %ARCH%` as the generator
   * enter a custom toolset if desired (usually `v141_xp`)
@@ -30,7 +30,7 @@
 
 to run:
 
-    $ ./lokinet
+    $ ./worktipsnet
 
 or press `Debug`/`Local Windows Debugger` in the visual studio standard toolbar
 

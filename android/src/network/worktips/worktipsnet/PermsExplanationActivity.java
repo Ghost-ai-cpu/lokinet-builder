@@ -1,4 +1,4 @@
-package network.loki.lokinet;
+package network.worktips.worktipsnet;
 
 import android.app.ActionBar;
 import android.content.Intent;
